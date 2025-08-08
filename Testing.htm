@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Discord Widget + Parent Target</title>
+  <style>
+    body {
+      background-color: #2C2F33;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      text-align: center;
+    }
+    #onlineCount {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #5865F2;
+    }
+    #rules {
+      background-color: #23272A;
+      border: 2px solid #5865F2;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    #rules h2 {
+      margin-top: 0;
+      color: #7289DA;
+    }
+    #rules ul {
+      padding-left: 20px;
+    }
+    #rules ul li {
+      margin-bottom: 8px;
+    }
+    .discord-widget {
+      border: 3px solid #5865F2;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px #5865F2;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 350px;
+      height: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .join-button {
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .join-button:hover {
+      background-color: #4752c4;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="onlineCount">Loading online members...</div>
+
+  <div id="rules">
+    <h2>Server Rules</h2>
+    <ul>
+      <li>Be respectful to everyone.</li>
+      <li>No spamming or advertising.</li>
+      <li>Use appropriate channels.</li>
+      <li>Follow Discord Terms of Service.</li>
+      <li>Have fun and enjoy the community!</li>
+    </ul>
+  </div>
+
+  <div class="discord-widget">
+    <iframe
+      src="https://discord.com/widget?id=569659821599490048&theme=dark"
+      allowtransparency="true"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+      scrolling="no">
+    </iframe>
+  </div>
+
+  <a href="https://discord.gg/NexFKueX4m" target="_parent" class="join-button">
+    Join Our Discord
+  </a>
+
+  <script>
+    fetch("https://discord.com/api/guilds/569659821599490048/widget.json")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("onlineCount").innerText = `Online Members: ${data.presence_count}`;
+      })
+      .catch(() => {
+        document.getElementById("onlineCount").innerText = "Failed to load online members.";
+      });
+  </script>
+
+</body>
+</html>
